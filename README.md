@@ -32,6 +32,7 @@ Choose the script file for your environment.
 
 ```sh
 alias minikube=/path/to/minikube-ingress-dns/minikube-ingress-dns
+```
 
 The default base domain for Ingress LB is `k8s.local`. For example, if you create an ingress object like the following, you can access http://nginx.k8s.local/ directly with curl, browser or something.
 

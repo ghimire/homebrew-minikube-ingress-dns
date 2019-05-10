@@ -28,11 +28,17 @@ $ brew services start dnsmasq
 
 ## Usage
 
-Choose the script file for your environment.
+To start the script every time `minikube start` is issued, add the alias. 
+If installed with Homebrew, add the following to `~/.bash_profile`:
+```sh
+alias minikube=$(brew --prefix)/etc/minikube-ingress-dns/minikube-ingress-dns
+```
 
+If installed with `git clone`, add appropriate path to `~/.bash_profile`:
 ```sh
 alias minikube=/path/to/minikube-ingress-dns/minikube-ingress-dns
 ```
+
 
 The default base domain for Ingress LB is `k8s.local`. For example, if you create an ingress object like the following, you can access http://nginx.k8s.local/ directly with curl, browser or something.
 
@@ -65,12 +71,12 @@ export MINIKUBE_INGRESS_DNS_DOMAIN="kube.test"
 ```
 
 ## Cleaning Up
-If installed using Homebrew,
+If installed with Homebrew,
 ```
 $ cd $(brew --prefix minikube-ingress-dns)/etc/minikube-ingress-dns
 ```
 
-If installed using git clone, 
+If installed with `git clone`, 
 ```
 cd /path/to/minikube-ingress-dns
 ```

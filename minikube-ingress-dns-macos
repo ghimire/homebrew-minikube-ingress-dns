@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-# minikube-ingress-dns-macos
+# minikube-ingress-dns
 # Copyright (c) 2017 Kazuki Suda <kazuki.suda@gmail.com>
+# Copyright (c) 2019 Ghimire <ghimire@users.noreply.github.com>
 #
 # This software is released under the MIT License.
 # http://opensource.org/licenses/mit-license.php
@@ -18,7 +19,7 @@ command minikube $@
 source $(dirname $0)/common.sh
 
 # The file path of dnsmasq.conf
-dnsmasq_config_file=/usr/local/etc/dnsmasq.conf
+dnsmasq_config_file=$(brew --prefix)/etc/dnsmasq.conf
 write_to_dnsmasq_config_file() {
   cat > $dnsmasq_config_file
 }

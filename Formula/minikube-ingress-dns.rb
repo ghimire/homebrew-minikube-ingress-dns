@@ -1,27 +1,20 @@
 class MinikubeIngressDns < Formula
   desc "Configure and restart dnsmasq automatically for Kubernetes Ingress LB on minikube"
-  homepage "https://github.com/superbrothers/minikube-ingress-dns"
-  version "v1.0.0"
-  url "https://github.com/superbrothers/minikube-ingress-dns.git", tag: version
-  head "https://github.com/superbrothers/minikube-ingress-dns.git", branch: "master"
+  homepage "https://github.com/ghimire/minikube-ingress-dns"
+  version "v2.0.0"
+  url "https://github.com/ghimire/minikube-ingress-dns.git", tag: version
+  head "https://github.com/ghimire/minikube-ingress-dns.git", branch: "master"
 
   def install
     (prefix/"etc/minikube-ingress-dns").install %w(
-      minikube-ingress-dns-macos
-      minikube-ingress-dns-ubuntu16
-      minikube-ingress-dns-ubuntu14
+      minikube-ingress-dns
       common.sh
     )
   end
 
   def caveats; <<~EOS
     Add the following line to your ~/.bash_profile:
-    # macOS
-    alias minikube=#{etc}/minikube-ingress-dns/minikube-ingress-dns-macos
-    # Ubuntu 16.04 LTS
-    alias minikube=#{etc}/minikube-ingress-dns/minikube-ingress-dns-ubuntu16
-    # Ubuntu 14.04 LTS
-    alias minikube=#{etc}/minikube-ingress-dns/minikube-ingress-dns-ubuntu14
+    alias minikube=#{etc}/minikube-ingress-dns/minikube-ingress-dns
     EOS
   end
 end

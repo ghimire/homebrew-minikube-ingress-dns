@@ -1,20 +1,20 @@
-# minikube-ingress-dns
+# minikube-ingress-dns for macOS
 
-This repository contains the script files in order to configure and restart dnsmasq automatically for Kubernetes Ingress LB on minikube after running `minikube start`. For more details, see [this article](http://qiita.com/superbrothers/items/13d8ce012ef23e22cb74) (In Japanese).
+This repository contains the script files in order to configure and restart dnsmasq automatically for Kubernetes Ingress Controller on minikube after running `minikube start`. This allows wildcard domain (eg `*.k8s.local`) to be used during development without having to add inidividual domains to `/etc/hosts`.
 
 ## Installation
 
 You can install minikube-ingress-dns with homebrew as follows:
 
 ```
-$ brew tap superbrothers/minikube-ingress-dns git://github.com/superbrothers/minikube-ingress-dns.git
+$ brew tap ghimire/minikube-ingress-dns git://github.com/ghimire/minikube-ingress-dns.git
 $ brew install minikube-ingress-dns
 ```
 
 Otherwise you just clone this repository to install:
 
 ```
-$ git clone https://github.com/superbrothers/minikube-ingress-dns.git /path/to/minikube-ingress-dns
+$ git clone https://github.com/ghimire/minikube-ingress-dns.git /path/to/minikube-ingress-dns
 ```
 
 ## Requirement
@@ -23,26 +23,17 @@ To work minikube-ingress-dns requires dnsmasq. If you use macOS, you can install
 
 ```
 $ brew install dnsmasq
+$ brew services start dnsmasq
 ```
-
-If you use Ubuntu desktop, you don't need to install dnsmasq due to it is already installed.
 
 ## Usage
 
 Choose the script file for your environment.
 
 ```sh
-# macOS
-alias minikube=/path/to/minikube-ingress-dns/minikube-ingress-dns-macos
+alias minikube=/path/to/minikube-ingress-dns/minikube-ingress-dns
 
-# Ubuntu 16.04 LTS
-alias minikube=/path/to/minikube-ingress-dns/minikube-ingress-dns-ubuntu16
-
-# Ubuntu 14.04 LTS
-alias minikube=/path/to/minikube-ingress-dns/minikube-ingress-dns-ubuntu14
-```
-
-The default base domain for Ingress LB is `minikube.dev`. For example, if you create an ingress object like the following, you can access http://nginx.minikube.dev/ directly with curl, browser or something.
+The default base domain for Ingress LB is `k8s.local`. For example, if you create an ingress object like the following, you can access http://nginx.k8s.local/ directly with curl, browser or something.
 
 ```
 $ minikube start
@@ -53,23 +44,46 @@ $ cat <<EOL | kubectl apply -f -
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: nginx.minikube.dev
+  name: nginx.k8s.local
 spec:
   rules:
-  - host: nginx.minikube.dev
+  - host: nginx.k8s.local
     http:
       paths:
       - backend:
           serviceName: nginx
           servicePort: 80
 EOL
-$ curl http://nginx.minikube.dev/
+$ curl http://nginx.k8s.local/
 ```
 
-If you'd like to change the base domain from `minikube.dev`, set the new domain name to the `MINIKUBE_INGRESS_DNS_DOMAIN` environment variable.
+If you'd like to change the base domain from `k8s.local`, set the new domain name to the `MINIKUBE_INGRESS_DNS_DOMAIN` environment variable.
 
 ```sh
-export MINIKUBE_INGRESS_DNS_DOMAIN="minikube.local"
+export MINIKUBE_INGRESS_DNS_DOMAIN="kube.test"
+```
+
+## Cleaning Up
+If installed using Homebrew,
+```
+$ cd $(brew --prefix minikube-ingress-dns)/etc/minikube-ingress-dns
+```
+
+If installed using git clone, 
+```
+cd /path/to/minikube-ingress-dns
+```
+
+Run cleanup and uninstall:
+```
+$ bash cleanup.sh
+$ brew uninstall minikube-ingress-dns
+```
+
+Optionally, uninstall `dnsmasq`:
+```
+$ brew services stop dnsmasq
+$ brew uninstall dnsmasq
 ```
 
 ## License

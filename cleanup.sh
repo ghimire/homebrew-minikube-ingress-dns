@@ -4,7 +4,6 @@ source $(dirname $0)/common.sh
 
 set -x
 
-rm /usr/local/etc/dnsmasq.conf
+rm $(brew --prefix)/etc/dnsmasq.conf
 sudo rm -rf /etc/resolver/${MINIKUBE_INGRESS_DNS_DOMAIN}
 sudo rmdir /etc/resolver
-# vim: ft=sh ts=2 sts=2 sw=2

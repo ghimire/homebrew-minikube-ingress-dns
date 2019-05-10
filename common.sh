@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
 # Copyright (c) 2017 Kazuki Suda <kazuki.suda@gmail.com>
+# Copyright (c) 2019 Ghimire <ghimire@users.noreply.github.com>
 #
 # This software is released under the MIT License.
 # http://opensource.org/licenses/mit-license.php
 
-MINIKUBE_INGRESS_DNS_DOMAIN=${MINIKUBE_INGRESS_DNS_DOMAIN:-minikube.dev}
+MINIKUBE_INGRESS_DNS_DOMAIN=${MINIKUBE_INGRESS_DNS_DOMAIN:-k8s.local}
 
 minikube_ingress_dns() {
   if [[ -z "$dnsmasq_config_file" ]]; then
@@ -29,8 +30,6 @@ minikube_ingress_dns() {
   echoinfo "The IP address of running a cluster: ${ip}"
 
   local dnsmasq_config="$(cat <<EOL
-bind-interfaces
-listen-address=127.0.0.1
 address=/${MINIKUBE_INGRESS_DNS_DOMAIN}/${ip}
 EOL
 )"
@@ -59,4 +58,3 @@ echoerr() {
   echo -n "[minikube-ingress-dns] ERROR: " >&2
   echo $@ >&2
 }
-# vim: ft=sh ts=2 sts=2 sw=2

@@ -6,7 +6,7 @@ class MinikubeIngressDns < Formula
   head "https://github.com/ghimire/homebrew-minikube-ingress-dns.git", branch: "master"
 
   def install
-    (prefix/"etc/minikube-ingress-dns").install %w(
+    (prefix/"etc/homebrew-minikube-ingress-dns").install %w(
       minikube-ingress-dns
       common.sh
       clean.sh
@@ -15,7 +15,7 @@ class MinikubeIngressDns < Formula
 
   def caveats; <<~EOS
     Add the following line to your ~/.bash_profile:
-    alias minikube=#{etc}/minikube-ingress-dns/minikube-ingress-dns
+    alias minikube=#{etc}/homebrew-minikube-ingress-dns/minikube-ingress-dns
     EOS
   end
 end

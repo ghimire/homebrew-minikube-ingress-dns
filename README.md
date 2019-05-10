@@ -7,14 +7,14 @@ This repository contains the script files in order to configure and restart dnsm
 You can install minikube-ingress-dns with homebrew as follows:
 
 ```
-$ brew tap ghimire/minikube-ingress-dns git://github.com/ghimire/minikube-ingress-dns.git
+$ brew tap ghimire/minikube-ingress-dns
 $ brew install minikube-ingress-dns
 ```
 
 Otherwise you just clone this repository to install:
 
 ```
-$ git clone https://github.com/ghimire/minikube-ingress-dns.git /path/to/minikube-ingress-dns
+$ git clone https://github.com/ghimire/homebrew-minikube-ingress-dns.git /path/to/minikube-ingress-dns
 ```
 
 ## Requirement

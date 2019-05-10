@@ -9,7 +9,7 @@ class MinikubeIngressDns < Formula
     (prefix/"etc/homebrew-minikube-ingress-dns").install %w(
       minikube-ingress-dns
       common.sh
-      clean.sh
+      cleanup.sh
     )
   end
 

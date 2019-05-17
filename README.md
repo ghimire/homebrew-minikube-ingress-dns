@@ -11,15 +11,9 @@ $ brew tap ghimire/minikube-ingress-dns
 $ brew install minikube-ingress-dns
 ```
 
-Otherwise you just clone this repository to install:
-
-```
-$ git clone https://github.com/ghimire/homebrew-minikube-ingress-dns.git /path/to/minikube-ingress-dns
-```
-
 ## Requirement
 
-To work minikube-ingress-dns requires dnsmasq. If you use macOS, you can install dnsmasq by using Homebrew.
+To work minikube-ingress-dns requires dnsmasq. You can install dnsmasq by using Homebrew.
 
 ```
 $ brew install dnsmasq
@@ -28,17 +22,10 @@ $ brew services start dnsmasq
 
 ## Usage
 
-To start the script every time `minikube start` is issued, add the alias. 
-If installed with Homebrew, add the following to `~/.bash_profile`:
+To start the script every time `minikube start` is issued, dd the following to `~/.bash_profile`:
 ```sh
-alias minikube=$(brew --prefix)/etc/minikube-ingress-dns/minikube-ingress-dns
+alias minikube=$(brew --prefix)/etc/homebrew-minikube-ingress-dns/minikube-ingress-dns
 ```
-
-If installed with `git clone`, add appropriate path to `~/.bash_profile`:
-```sh
-alias minikube=/path/to/minikube-ingress-dns/minikube-ingress-dns
-```
-
 
 The default base domain for Ingress LB is `k8s.local`. For example, if you create an ingress object like the following, you can access http://nginx.k8s.local/ directly with curl, browser or something.
 
@@ -74,11 +61,6 @@ export MINIKUBE_INGRESS_DNS_DOMAIN="kube.test"
 If installed with Homebrew,
 ```
 $ cd $(brew --prefix minikube-ingress-dns)/etc/minikube-ingress-dns
-```
-
-If installed with `git clone`, 
-```
-cd /path/to/minikube-ingress-dns
 ```
 
 Run cleanup and uninstall:

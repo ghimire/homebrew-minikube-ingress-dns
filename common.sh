@@ -30,6 +30,8 @@ minikube_ingress_dns() {
   echoinfo "The IP address of running a cluster: ${ip}"
 
   local dnsmasq_config="$(cat <<EOL
+bind-interfaces
+listen-address=127.0.0.1,192.168.64.1
 address=/${MINIKUBE_INGRESS_DNS_DOMAIN}/${ip}
 EOL
 )"
